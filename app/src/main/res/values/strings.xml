@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PasswordGen</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="share_text">Отправить пароль</string>
+</resources>
