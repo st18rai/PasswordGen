@@ -1,9 +1,10 @@
 package com.st18apps.passwordgen.ui.fragment.favorites;
 
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +13,18 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.st18apps.passwordgen.MyAdapter;
 import com.st18apps.passwordgen.R;
+import com.st18apps.passwordgen.model.WordsDB;
 import com.st18apps.passwordgen.presentation.presenter.favorites.FavoritesPresenter;
 import com.st18apps.passwordgen.presentation.view.favorites.FavoritesView;
+
+import java.util.List;
 
 public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView {
     public static final String TAG = "FavoritesFragment";
     @InjectPresenter
     FavoritesPresenter mFavoritesPresenter;
 
-    private String[] keyWord = {
-            "Papa",
-            "Mama",
-            "John",
-            "Cat"
-    };
-    private String[] shifrType = {
-            "SHA1",
-            "SHA1",
-            "BASE64",
-            "MD5"
-    };
+    private long initialCount;
 
     public static FavoritesFragment newInstance() {
         FavoritesFragment fragment = new FavoritesFragment();
@@ -55,16 +48,64 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
         View view = getView();
         if (view != null) {
 
-            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerFavorites);
+            final List<WordsDB> keyWord = WordsDB.listAll(WordsDB.class);
+
+            initialCount = WordsDB.count(WordsDB.class);
+
+            final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerFavorites);
+
+            if (initialCount >= 0) {
+
+                if (keyWord.isEmpty())
+                    Snackbar.make(recyclerView, "No words added.", Snackbar.LENGTH_LONG).show();
+
+            }
 
             recyclerView.setNestedScrollingEnabled(true);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView.setLayoutManager(linearLayoutManager);
-            MyAdapter adapter = new MyAdapter(keyWord, shifrType);
+            final MyAdapter adapter = new MyAdapter(keyWord);
             recyclerView.setAdapter(adapter);
-            //add divider
-            recyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(),
-                    DividerItemDecoration.VERTICAL));
+
+            // Handling swipe to delete
+            ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+                @Override
+                public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                    //Remove swiped item from list and notify the RecyclerView
+
+                    final int position = viewHolder.getAdapterPosition();
+                    final WordsDB wordsDB = keyWord.get(viewHolder.getAdapterPosition());
+                    keyWord.remove(viewHolder.getAdapterPosition());
+                    adapter.notifyItemRemoved(position);
+
+                    wordsDB.delete();
+                    initialCount -= 1;
+
+                    Snackbar.make(recyclerView, "Word deleted", Snackbar.LENGTH_SHORT)
+                            .setAction("UNDO", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    wordsDB.save();
+                                    keyWord.add(position, wordsDB);
+                                    adapter.notifyItemInserted(position);
+                                    initialCount += 1;
+
+                                }
+                            })
+                            .show();
+                }
+
+            };
+
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+            itemTouchHelper.attachToRecyclerView(recyclerView);
 
         }
     }

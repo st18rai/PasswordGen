@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.st18apps.passwordgen.R;
 import com.st18apps.passwordgen.Utils;
+import com.st18apps.passwordgen.model.WordsDB;
 import com.st18apps.passwordgen.presentation.presenter.generatePassword.GeneratePasswordPresenter;
 import com.st18apps.passwordgen.presentation.view.generatePassword.GeneratePasswordView;
 
@@ -39,6 +41,7 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
     private TextView password;
     private ImageButton copy;
     private ImageButton share;
+    private ImageButton favorite;
     private EditText enteredDataSimple;
     private Button generateSimple;
 
@@ -74,6 +77,7 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
             password = (TextView) view.findViewById(R.id.textViewFragmentGeneratedPassword);
             copy = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateCopy);
             share = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateShare);
+            favorite = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateAddFavorite);
             enteredDataSimple = (EditText) view.findViewById(R.id.editTextFragmentGenerateCharNumber);
             generateSimple = (Button) view.findViewById(R.id.buttonFragmentGenerateSimple);
         }
@@ -119,6 +123,13 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
                 sharePassword();
             }
         });
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToFavorite();
+            }
+        });
     }
 
     @Override
@@ -143,7 +154,9 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
                 password.setText(Utils.base64(enteredDataHash.getText().toString()));
             }
         } else
-            Toast.makeText(getActivity().getApplicationContext(), "Enter data!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity().getApplicationContext(), "Enter data!", Toast.LENGTH_SHORT).show();
+            Snackbar.make(password, "Enter data!", Snackbar.LENGTH_LONG).show();
+
     }
 
     public void generatePasswordSimple() {
@@ -156,13 +169,16 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
                 password.setText(newPassword);
                 type.setText("Your password");
             } else
-                Toast.makeText(getActivity().getApplicationContext(), "Please, use a value between 1 and 100 in a field above", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "Please, use a value between 1 and 100 in a field above", Toast.LENGTH_LONG).show();
+                Snackbar.make(password, "Please, use a value between 1 and 100 in a field above", Snackbar.LENGTH_LONG).show();
         } else
-            Toast.makeText(getActivity().getApplicationContext(), "Enter data!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity().getApplicationContext(), "Enter data!", Toast.LENGTH_SHORT).show();
+            Snackbar.make(password, "Enter data!", Snackbar.LENGTH_LONG).show();
     }
 
     public void deleteDataHash() {
         enteredDataHash.setText("");
+        type.setText("");
         password.setText("Generated password");
     }
 
@@ -176,7 +192,8 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
         ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(null, password.getText());
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(getActivity().getApplicationContext(), "Copied to clipboard", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "Copied to clipboard", Toast.LENGTH_SHORT).show();
+        Snackbar.make(password, "Copied to clipboard", Snackbar.LENGTH_LONG).show();
     }
 
     public void sharePassword() {
@@ -186,5 +203,21 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, password.getText());
         startActivity(Intent.createChooser(shareIntent, getString(R.string.share_text)));
+    }
+
+    public void addToFavorite(){
+
+        if (!TextUtils.isEmpty(enteredDataHash.getText().toString()) && !TextUtils.isEmpty(type.getText())) {
+            String currentWord = enteredDataHash.getText().toString();
+            String currentType = type.getText().toString();
+
+            WordsDB wordsDB = new WordsDB(currentWord, currentType);
+            wordsDB.save();
+
+            //Toast.makeText(getActivity().getApplicationContext(), "Added to favorites: " + currentWord, Toast.LENGTH_SHORT).show();
+            Snackbar.make(password, "Added to favorites: " + currentWord, Snackbar.LENGTH_LONG).show();
+        } else
+            Snackbar.make(password, "Enter data!", Snackbar.LENGTH_LONG).show();
+
     }
 }

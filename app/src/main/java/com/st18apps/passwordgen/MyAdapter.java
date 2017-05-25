@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.st18apps.passwordgen.model.WordsDB;
+
+import java.util.List;
+
 /**
  * Created by st18rai on 22.05.17.
  */
@@ -20,22 +25,20 @@ import android.widget.Toast;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     //Предоставляет ссылку на представления, используемые в RecyclerView
-    private String[] keyWord;
-    private String[] shifrType;
+    private List<WordsDB> keyWord;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         //Определение класса ViewHolder
-        private RelativeLayout relativeLayout;
+        private CardView cardView;
 
-        ViewHolder(RelativeLayout v) {
+        ViewHolder(CardView v) {
             super(v);
-            relativeLayout = v;
+            cardView = v;
         }
     }
 
-    public MyAdapter(String[] keyWord, String[] shifrType) {
+    public MyAdapter(List<WordsDB> keyWord) {
         this.keyWord = keyWord;
-        this.shifrType = shifrType;
     }
 
 
@@ -43,24 +46,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public MyAdapter.ViewHolder onCreateViewHolder(
             ViewGroup parent, int viewType) {
         //Создание нового представления
-        RelativeLayout relative = (RelativeLayout) LayoutInflater.from(parent.getContext())
+        CardView cardView = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_item, parent, false);
-        return new ViewHolder(relative);
+        return new ViewHolder(cardView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         //Заполнение заданного представления данными
-        final RelativeLayout relativeLayout = holder.relativeLayout;
+        final CardView card = holder.cardView;
 
-        final TextView word = (TextView) relativeLayout.findViewById(R.id.textViewFavoriteWord);
-        final TextView type = (TextView) relativeLayout.findViewById(R.id.textViewFavoriteType);
-        ImageButton favorite = (ImageButton) relativeLayout.findViewById(R.id.imageButtonFavorite);
-        ImageButton copy = (ImageButton) relativeLayout.findViewById(R.id.imageButtonFavoriteCopy);
-        ImageButton share = (ImageButton) relativeLayout.findViewById(R.id.imageButtonFavoriteShare);
+        final TextView word = (TextView) card.findViewById(R.id.textViewFavoriteWord);
+        final TextView type = (TextView) card.findViewById(R.id.textViewFavoriteType);
+        ImageButton copy = (ImageButton) card.findViewById(R.id.imageButtonFavoriteCopy);
+        ImageButton share = (ImageButton) card.findViewById(R.id.imageButtonFavoriteShare);
 
-        word.setText(keyWord[position]);
-        type.setText(shifrType[position]);
+        word.setText(keyWord.get(position).getWord());
+        type.setText(keyWord.get(position).getType());
 
         copy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +89,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         //Возвращает количество вариантов в наборе данных
-        return keyWord.length;
+        return keyWord.size();
     }
 }

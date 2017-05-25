@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.st18apps.passwordgen.ui.fragment.aboutApp.AboutAppFragment;
 import com.st18apps.passwordgen.ui.fragment.favorites.FavoritesFragment;
 import com.st18apps.passwordgen.ui.fragment.generatePassword.GeneratePasswordFragment;
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.navigation_notifications:
                    // mTextMessage.setText(R.string.title_notifications);
+                    fragment = new AboutAppFragment();
                     break;
             }
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
