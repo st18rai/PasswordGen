@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PasswordGen</string>
+    <string name="about">Версия</string>
+    <string name="added_to_favorite">Добавлено в избранное</string>
+    <string name="clipboard_text">Скопировано в буфер обмена</string>
+    <string name="generated_password_text">Ваш пароль будет здесь</string>
+    <string name="if_hash_field_empty">Введите данные!</string>
+    <string name="if_simple_field_empty">Пожалуйста, используйте значение от 1 до 100 в поле выше</string>
+    <string name="share_text">Отправить пароль</string>
+    <string name="title_about">О программе</string>
+    <string name="title_favorites">Избранное</string>
+    <string name="title_home">Домой</string>
+    <string name="your_password">Ваш пароль</string>
+    <string name="no_words">Еще нет избранных слов</string>
+    <string name="undo">Отменить</string>
+    <string name="word_deleted">Слово удалено</string>
+    <string name="et_hash_hint">Введите что-то</string>
+    <string name="et_hint_number">Введите число</string>
+    <string name="generate_button">Сгенерировать</string>
+    <string name="tv_or">ИЛИ</string>
+</resources>

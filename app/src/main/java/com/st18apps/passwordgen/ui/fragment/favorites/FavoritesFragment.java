@@ -57,7 +57,7 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
             if (initialCount >= 0) {
 
                 if (keyWord.isEmpty())
-                    Snackbar.make(recyclerView, "No words added.", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(recyclerView, R.string.no_words, Snackbar.LENGTH_LONG).show();
 
             }
 
@@ -87,8 +87,8 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
                     wordsDB.delete();
                     initialCount -= 1;
 
-                    Snackbar.make(recyclerView, "Word deleted", Snackbar.LENGTH_SHORT)
-                            .setAction("UNDO", new View.OnClickListener() {
+                    Snackbar.make(recyclerView, R.string.word_deleted, Snackbar.LENGTH_SHORT)
+                            .setAction(R.string.undo, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 

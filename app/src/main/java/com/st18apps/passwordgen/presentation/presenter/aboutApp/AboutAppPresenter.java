@@ -8,4 +8,24 @@ import com.arellomobile.mvp.MvpPresenter;
 @InjectViewState
 public class AboutAppPresenter extends MvpPresenter<AboutAppView> {
 
+    public void setAnimation() {
+        getViewState().setAnimation();
+    }
+
+    public void setVersionName() {
+        getViewState().setVersionText();
+    }
+
+    public void onPlayStoreClick() {
+        getViewState().onPlayStoreClick();
+    }
+
+    public void onMailClick() {
+        getViewState().onMailClick();
+    }
+
+    public void onRateClick() {
+        getViewState().onRateClick();
+    }
+
 }

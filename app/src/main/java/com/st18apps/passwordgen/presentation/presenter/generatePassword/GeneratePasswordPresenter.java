@@ -8,4 +8,32 @@ import com.arellomobile.mvp.MvpPresenter;
 @InjectViewState
 public class GeneratePasswordPresenter extends MvpPresenter<GeneratePasswordView> {
 
+    public void generatePasswordHash() {
+        getViewState().generatePasswordHash();
+    }
+
+    public void generatePasswordSimple() {
+        getViewState().generatePasswordSimple();
+    }
+
+    public void deleteDataHash() {
+        getViewState().deleteDataHash();
+    }
+
+    public void deleteDataSimple() {
+        getViewState().deleteDataSimple();
+    }
+
+    public void copyToClipboard() {
+        getViewState().copyToClipboard();
+    }
+
+    public void sharePassword() {
+        getViewState().sharePassword();
+    }
+
+    public void addToFavorite() {
+        getViewState().addToFavorite();
+    }
+
 }

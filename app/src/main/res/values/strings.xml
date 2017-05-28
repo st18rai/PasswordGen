@@ -1,7 +1,24 @@
 <resources>
     <string name="app_name">PasswordGen</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="share_text">Отправить пароль</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_about">About</string>
+    <string name="share_text">Send password</string>
+    <string name="about">Version </string>
+    <string name="md5" translatable="false">MD5</string>
+    <string name="sha1" translatable="false">SHA1</string>
+    <string name="base64" translatable="false">BASE64</string>
+    <string name="if_hash_field_empty">Enter data!</string>
+    <string name="your_password">Your password</string>
+    <string name="if_simple_field_empty">Please, use a value between 1 and 100 in a field above</string>
+    <string name="generated_password_text">Generated password will be here</string>
+    <string name="clipboard_text">Copied to clipboard</string>
+    <string name="added_to_favorite">Added to favorites:</string>
+    <string name="no_words">No words added.</string>
+    <string name="word_deleted">Word deleted</string>
+    <string name="undo">UNDO</string>
+    <string name="et_hash_hint">Enter something</string>
+    <string name="generate_button">Generate</string>
+    <string name="tv_or">OR</string>
+    <string name="et_hint_number">Enter number of characters</string>
 </resources>
