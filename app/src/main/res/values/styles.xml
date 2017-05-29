@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ButtonStyle">
+        <item name="colorButtonNormal">#004951</item>
+        <item name="colorAccent">#24a185</item>
+    </style>
+
 </resources>

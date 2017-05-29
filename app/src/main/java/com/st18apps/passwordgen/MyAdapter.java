@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -70,7 +71,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 ClipboardManager clipboard = (ClipboardManager) v.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText(null, word.getText());
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(v.getContext().getApplicationContext(), "Copied to clipboard", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext().getApplicationContext(), R.string.clipboard_text, Toast.LENGTH_SHORT).show();
+                Snackbar.make(word, R.string.clipboard_text, Snackbar.LENGTH_LONG).show();
             }
         });
 

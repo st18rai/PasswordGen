@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +26,6 @@ import com.st18apps.passwordgen.model.WordsDB;
 import com.st18apps.passwordgen.presentation.presenter.generatePassword.GeneratePasswordPresenter;
 import com.st18apps.passwordgen.presentation.view.generatePassword.GeneratePasswordView;
 
-import static android.R.attr.fragment;
-
 public class GeneratePasswordFragment extends MvpAppCompatFragment implements GeneratePasswordView {
     public static final String TAG = "GeneratePasswordFragment";
     @InjectPresenter
@@ -38,14 +37,14 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
     private RadioButton base64;
     private ImageButton deleteHash;
     private ImageButton deleteSimple;
-    private Button generateHash;
+    private AppCompatButton generateHash;
     private TextView type;
     private TextView password;
     private ImageButton copy;
     private ImageButton share;
     private ImageButton favorite;
     private EditText enteredDataSimple;
-    private Button generateSimple;
+    private AppCompatButton generateSimple;
 
     public static GeneratePasswordFragment newInstance() {
         GeneratePasswordFragment fragment = new GeneratePasswordFragment();
@@ -69,14 +68,14 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
             base64 = (RadioButton) view.findViewById(R.id.radioButtonFragmentGenerateBASE64);
             deleteHash = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateDeleteHash);
             deleteSimple = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateDeleteSimple);
-            generateHash = (Button) view.findViewById(R.id.buttonFragmentGenerateHash);
+            generateHash = (AppCompatButton) view.findViewById(R.id.buttonFragmentGenerateHash);
             type = (TextView) view.findViewById(R.id.textViewFragmentGenerateType);
             password = (TextView) view.findViewById(R.id.textViewFragmentGeneratedPassword);
             copy = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateCopy);
             share = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateShare);
             favorite = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateAddFavorite);
             enteredDataSimple = (EditText) view.findViewById(R.id.editTextFragmentGenerateCharNumber);
-            generateSimple = (Button) view.findViewById(R.id.buttonFragmentGenerateSimple);
+            generateSimple = (AppCompatButton) view.findViewById(R.id.buttonFragmentGenerateSimple);
         }
         generateHash.setOnClickListener(new View.OnClickListener() {
             @Override
