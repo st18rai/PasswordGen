@@ -104,7 +104,7 @@ public class AboutAppFragment extends MvpAppCompatFragment implements AboutAppVi
     @Override
     public void setVersionText() {
         String mVersionName = BuildConfig.VERSION_NAME;
-        mVersionTv.setText(getResources().getString(R.string.about) + " " + mVersionName);
+        mVersionTv.setText(getResources().getString(R.string.version) + " " + mVersionName);
     }
 
     @Override

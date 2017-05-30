@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PasswordGen</string>
-    <string name="about">Версия</string>
+    <string name="version">Версия</string>
     <string name="added_to_favorite">Добавлено в избранное:</string>
     <string name="clipboard_text">Скопировано в буфер обмена</string>
     <string name="generated_password_text">Ваш пароль будет здесь</string>
@@ -19,4 +19,5 @@
     <string name="et_hint_number">Введите длину пароля</string>
     <string name="generate_button">Сгенерировать</string>
     <string name="tv_or">ИЛИ</string>
+    <string name="about_app">Генератор паролей</string>
 </resources>
