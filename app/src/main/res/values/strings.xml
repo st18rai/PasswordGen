@@ -22,4 +22,6 @@
     <string name="tv_or">OR</string>
     <string name="et_hint_number">Enter number of characters</string>
     <string name="about_app">Password generator</string>
+    <string name="help_menu">Help</string>
+    <string name="help_text">Help will be here</string>
 </resources>

@@ -39,7 +39,7 @@
             android:layout_toStartOf="@id/imageButtonFavoriteShare"
             android:background="?android:selectableItemBackground"
             android:padding="4dp"
-            app:srcCompat="@drawable/ic_content_copy_black_24dp" />
+            app:srcCompat="@drawable/ic_content_copy_24dp" />
 
         <ImageButton
             android:id="@+id/imageButtonFavoriteShare"
@@ -49,7 +49,7 @@
             android:layout_alignParentRight="true"
             android:background="?android:selectableItemBackground"
             android:padding="4dp"
-            app:srcCompat="@drawable/ic_share_black_24dp" />
+            app:srcCompat="@drawable/ic_share_24dp" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

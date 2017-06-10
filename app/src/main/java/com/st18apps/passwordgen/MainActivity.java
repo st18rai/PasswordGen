@@ -7,20 +7,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.ActionMenuItemView;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.st18apps.passwordgen.ui.fragment.aboutApp.AboutAppFragment;
 import com.st18apps.passwordgen.ui.fragment.favorites.FavoritesFragment;
 import com.st18apps.passwordgen.ui.fragment.generatePassword.GeneratePasswordFragment;
+import com.st18apps.passwordgen.ui.fragment.generatePassword.HelpDialog;
 
 public class MainActivity extends AppCompatActivity {
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
-    //final String CURRENT_FRAGMENT = "Current fragment";
-    //final String TAG_GENERATE_PASSWORD = "GeneratePasswordFragment";
-    //final String TAG_FAVORITE = "FavoriteFragment";
-    //final String TAG_ABOUT_APP = "AboutAppFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,40 +30,36 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             fragment = new GeneratePasswordFragment();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.content, fragment).commit();
         }
-        /*
-        if (savedInstanceState != null) {
-            currentFragment = savedInstanceState.getInt(CURRENT_FRAGMENT, 1);
-        }
 
-        fragmentManager = getSupportFragmentManager();
-
-        switch (currentFragment) {
-
-            case 1:
-                fragment = new GeneratePasswordFragment();
-                currentFragment = 1;
-                break;
-            case 2:
-                fragment = new FavoritesFragment();
-                currentFragment = 2;
-                break;
-            case 3:
-                fragment = new AboutAppFragment();
-                currentFragment = 3;
-                break;
-        }
-
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.content, fragment).commit();
-
-        */
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.menuInfo) {
+            showHelpDialog();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -74,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     fragment = new GeneratePasswordFragment();
-                  //  currentFragment = 1;
+                    showHelpMenu();
                     break;
                 case R.id.navigation_favorite:
                     fragment = new FavoritesFragment();
-                   // currentFragment = 2;
+                    hideHelpMenu();
                     break;
                 case R.id.navigation_about:
                     fragment = new AboutAppFragment();
-                   // currentFragment = 3;
+                    hideHelpMenu();
                     break;
             }
             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -91,10 +87,25 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void showHelpDialog() {
+
+        android.app.FragmentManager fm = this.getFragmentManager();
+        HelpDialog helpDialog = new HelpDialog();
+        helpDialog.show(fm, "Help Dialog Fragment");
+    }
+
+    public void showHelpMenu() {
+        ActionMenuItemView item = (ActionMenuItemView) findViewById(R.id.menuInfo);
+        item.setVisibility(View.VISIBLE);
+    }
+
+    public void hideHelpMenu() {
+        ActionMenuItemView item = (ActionMenuItemView) findViewById(R.id.menuInfo);
+        item.setVisibility(View.GONE);
+    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-       // outState.putInt(CURRENT_FRAGMENT, currentFragment);
-
     }
 }
