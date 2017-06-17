@@ -1,6 +1,5 @@
 package com.st18apps.passwordgen;
 
-import android.app.Application;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;

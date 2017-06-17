@@ -23,5 +23,21 @@
     <string name="et_hint_number">Enter number of characters</string>
     <string name="about_app">Password generator</string>
     <string name="help_menu">Help</string>
-    <string name="help_text">Help will be here</string>
+    <string name="help_text">
+        "The program can work in 2 modes: "\n\n
+
+        "1) Generating a password based on the keyword. To do this, in the first input field, enter "
+        "the word or phrase, select one of the algorithms and click the «Generate» button." \n
+        "2) Generating a password of a given length. Just enter the desired password length in the "
+        "second input field and click the «Generate» button." \n\n
+
+        "Briefly about the algorithms:" \n\n
+
+        "1) MD5 - the length of 32 characters, contains lowercase letters of the Latin alphabet and "
+        "numbers." \n\n
+        "2) SHA1 - the length of 40 characters, contains lowercase letters of the Latin alphabet "
+        "and numbers." \n\n
+        "3) BASE64 - contains letters, numbers, special characters. The longer the entered value "
+        "- the longer the password."
+    </string>
 </resources>

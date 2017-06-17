@@ -126,92 +126,12 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
         return view;
 
     }
-/*
-    @Override
-    public void onStart() {
-        super.onStart();
-        View view = getView();
-        if (view != null) {
-            enteredDataHash = (EditText) view.findViewById(R.id.editTextFragmentGenerate);
-            md5 = (RadioButton) view.findViewById(R.id.radioButtonFragmentGenerateMD5);
-            sha1 = (RadioButton) view.findViewById(R.id.radioButtonFragmentGenerateSHA1);
-            base64 = (RadioButton) view.findViewById(R.id.radioButtonFragmentGenerateBASE64);
-            deleteHash = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateDeleteHash);
-            deleteSimple = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateDeleteSimple);
-            generateHash = (Button) view.findViewById(R.id.buttonFragmentGenerateHash);
-            type = (TextView) view.findViewById(R.id.textViewFragmentGenerateType);
-            password = (TextView) view.findViewById(R.id.textViewFragmentGeneratedPassword);
-            copy = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateCopy);
-            share = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateShare);
-            favorite = (ImageButton) view.findViewById(R.id.imageButtonFragmentGenerateAddFavorite);
-            enteredDataSimple = (EditText) view.findViewById(R.id.editTextFragmentGenerateCharNumber);
-            generateSimple = (Button) view.findViewById(R.id.buttonFragmentGenerateSimple);
-        }
 
-        generateHash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGeneratePasswordPresenter.generatePasswordHash();
-            }
-        });
-
-        generateSimple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGeneratePasswordPresenter.generatePasswordSimple();
-            }
-        });
-
-        deleteHash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGeneratePasswordPresenter.deleteDataHash();
-            }
-        });
-
-        deleteSimple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGeneratePasswordPresenter.deleteDataSimple();
-            }
-        });
-
-        copy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGeneratePasswordPresenter.copyToClipboard();
-            }
-        });
-
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGeneratePasswordPresenter.sharePassword();
-            }
-        });
-
-        favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mGeneratePasswordPresenter.addToFavorite();
-            }
-        });
-    }
-*/
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
     }
-
-    /*
-        if (savedInstanceState != null) {
-            enteredDataHash.setText(savedInstanceState.getString("enteredDataHash", ""));
-            enteredDataSimple.setText(savedInstanceState.getString("enteredDataSimple", ""));
-            type.setText(savedInstanceState.getString("type", ""));
-            password.setText(savedInstanceState.getString("password", getResources().getString(R.string.generated_password_text)));
-        }
-    */
 
     @Override
     public void generatePasswordHash() {
@@ -302,15 +222,4 @@ public class GeneratePasswordFragment extends MvpAppCompatFragment implements Ge
             Snackbar.make(password, R.string.if_hash_field_empty, Snackbar.LENGTH_LONG).show();
 
     }
-
-    /*
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("enteredDataHash", enteredDataHash.getText().toString());
-        outState.putString("enteredDataSimple", enteredDataSimple.getText().toString());
-        outState.putString("type", type.getText().toString());
-        outState.putString("password", password.getText().toString());
-    }
-    */
 }
