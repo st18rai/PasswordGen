@@ -19,8 +19,8 @@ import com.st18apps.passwordgen.ui.fragment.generatePassword.HelpDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Fragment fragment;
-    private FragmentManager fragmentManager;
+    private Fragment mFragment;
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        fragmentManager = getSupportFragmentManager();
+        mFragmentManager = getSupportFragmentManager();
 
         if (savedInstanceState == null) {
-            fragment = new GeneratePasswordFragment();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.content, fragment).commit();
+            mFragment = new GeneratePasswordFragment();
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            transaction.replace(R.id.content, mFragment).commit();
         }
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -69,20 +69,20 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    fragment = new GeneratePasswordFragment();
+                    mFragment = new GeneratePasswordFragment();
                     showHelpMenu();
                     break;
                 case R.id.navigation_favorite:
-                    fragment = new FavoritesFragment();
+                    mFragment = new FavoritesFragment();
                     hideHelpMenu();
                     break;
                 case R.id.navigation_about:
-                    fragment = new AboutAppFragment();
+                    mFragment = new AboutAppFragment();
                     hideHelpMenu();
                     break;
             }
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.content, fragment).commit();
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            transaction.replace(R.id.content, mFragment).commit();
             return true;
         }
     };

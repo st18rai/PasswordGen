@@ -11,9 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.st18apps.passwordgen.model.WordsDB;
 
@@ -26,20 +24,20 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     //Предоставляет ссылку на представления, используемые в RecyclerView
-    private List<WordsDB> keyWord;
+    private List<WordsDB> mKeyWord;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         //Определение класса ViewHolder
-        private CardView cardView;
+        private CardView mCardView;
 
         ViewHolder(CardView v) {
             super(v);
-            cardView = v;
+            mCardView = v;
         }
     }
 
-    public MyAdapter(List<WordsDB> keyWord) {
-        this.keyWord = keyWord;
+    public MyAdapter(List<WordsDB> mKeyWord) {
+        this.mKeyWord = mKeyWord;
     }
 
 
@@ -55,15 +53,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         //Заполнение заданного представления данными
-        final CardView card = holder.cardView;
+        final CardView card = holder.mCardView;
 
         final TextView word = (TextView) card.findViewById(R.id.textViewFavoriteWord);
         final TextView type = (TextView) card.findViewById(R.id.textViewFavoriteType);
         ImageButton copy = (ImageButton) card.findViewById(R.id.imageButtonFavoriteCopy);
         ImageButton share = (ImageButton) card.findViewById(R.id.imageButtonFavoriteShare);
 
-        word.setText(keyWord.get(position).getWord());
-        type.setText(keyWord.get(position).getType());
+        word.setText(mKeyWord.get(position).getWord());
+        type.setText(mKeyWord.get(position).getType());
 
         copy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +89,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         //Возвращает количество вариантов в наборе данных
-        return keyWord.size();
+        return mKeyWord.size();
     }
 }

@@ -28,7 +28,7 @@ public class App extends SugarApp {
             return;
         }
         LeakCanary.install(this);
-        Fabric.with(this, new Crashlytics());
+        //Fabric.with(this, new Crashlytics());
         Log.i("crashlytics", "it created");
 
     }
